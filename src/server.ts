@@ -2,10 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import API from './api';
 import * as utility from './utility';
+import serverConfig from '../config/server.json';
 
 // express app
 const app = express();
-const port = 8080;
+const port = serverConfig.port;
 
 // middleware
 app.use(bodyParser.json());
