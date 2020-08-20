@@ -14,3 +14,17 @@ export const create = (id: string, date: string, startTime: number, endTime: num
 
     });
 };
+
+export const getByWeek = (id: string, week: string): Promise<any[]> => {
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            const selectByWeek = await DB.run(appointmentSQL.selectByWeek(id, week));
+
+            resolve(selectByWeek);
+
+        } catch(error) { reject(error); }
+
+    });
+};

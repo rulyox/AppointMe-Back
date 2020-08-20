@@ -27,3 +27,25 @@ export const post = async (request: express.Request, response: express.Response,
     } catch(error) { next(error); }
 
 };
+
+export const get = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+
+    try {
+
+        // parse request
+        const id = request.params.id;
+        const week = request.params.week;
+
+        // type check
+        if(id === null || isNaN(Number(week))) {
+            response.status(400).end();
+            return;
+        }
+
+        // response
+        const result = await appointmentService.get(id, week);
+        response.json(result);
+
+    } catch(error) { next(error); }
+
+};
