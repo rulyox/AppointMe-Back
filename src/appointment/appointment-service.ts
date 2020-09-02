@@ -38,7 +38,7 @@ export const get = (id: string, week: string): Promise<any> => {
 
             for(const [index, value] of Object.entries(appointmentList)) {
 
-                const weekDay = Number(value.appoint_weekday);
+                const weekDay = Number(value.weekday);
                 const startTime = Number(value.start_time.split(':')[0]);
                 const endTime = Number(value.end_time.split(':')[0]);
 
