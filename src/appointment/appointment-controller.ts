@@ -12,16 +12,15 @@ export const post = async (request: express.Request, response: express.Response,
         const endTime = request.body.endTime;
         const name = request.body.name;
         const description = request.body.description;
-        const unavailable = request.body.unavailable;
 
         // type check
-        if(id === null || typeof date !== 'string' || typeof startTime !== 'number'|| typeof endTime !== 'number' || typeof name !== 'string' || typeof description !== 'string' || typeof unavailable !== 'boolean') {
+        if(id === null || typeof date !== 'string' || typeof startTime !== 'number'|| typeof endTime !== 'number' || typeof name !== 'string' || typeof description !== 'string') {
             response.status(400).end();
             return;
         }
 
         // response
-        const result = await appointmentService.post(id, date, startTime, endTime, name, description, unavailable);
+        const result = await appointmentService.post(id, date, startTime, endTime, name, description);
         response.json(result);
 
     } catch(error) { next(error); }
