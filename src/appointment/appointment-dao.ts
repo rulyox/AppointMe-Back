@@ -1,12 +1,12 @@
 import * as DB from '../db';
 import * as appointmentSQL from './appointment-sql';
 
-export const create = (id: string, date: string, startTime: number, endTime: number, name: string, description: string) => {
+export const create = (id: string, date: string, startTime: number, endTime: number, name: string, description: string, color: string) => {
     return new Promise(async (resolve, reject) => {
 
         try {
 
-            await DB.run(appointmentSQL.add(id, date, startTime, endTime, name, description));
+            await DB.run(appointmentSQL.add(id, date, startTime, endTime, name, description, color));
 
             resolve();
 

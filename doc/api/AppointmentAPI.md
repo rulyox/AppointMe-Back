@@ -16,7 +16,8 @@ id: string
   "startTime": "number",
   "endTime": "number",
   "name": "string",
-  "description": "string"
+  "description": "string",
+  "color": "string"
 }
 ```
 

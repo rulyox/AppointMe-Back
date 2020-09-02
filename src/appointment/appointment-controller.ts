@@ -13,6 +13,7 @@ startTime: number
 endTime: number
 name: string
 description: string
+color: string
 
 Response JSON
 list: array
@@ -29,15 +30,16 @@ export const post = async (request: express.Request, response: express.Response,
         const endTime = request.body.endTime;
         const name = request.body.name;
         const description = request.body.description;
+        const color = request.body.color;
 
         // type check
-        if(id === null || typeof date !== 'string' || typeof startTime !== 'number'|| typeof endTime !== 'number' || typeof name !== 'string' || typeof description !== 'string') {
+        if(id === null || typeof date !== 'string' || typeof startTime !== 'number'|| typeof endTime !== 'number' || typeof name !== 'string' || typeof description !== 'string' || typeof color !== 'string') {
             response.status(400).end();
             return;
         }
 
         // response
-        const result = await appointmentService.post(id, date, startTime, endTime, name, description);
+        const result = await appointmentService.post(id, date, startTime, endTime, name, description, color);
         response.json(result);
 
     } catch(error) { next(error); }
