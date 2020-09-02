@@ -1,6 +1,16 @@
 import express from 'express';
 import * as userService from './user-service';
 
+/*
+Check login and create token.
+
+Request Body JSON
+id: string
+pw: string
+
+Response JSON
+token: string
+*/
 export const postToken = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
     try {
@@ -23,6 +33,15 @@ export const postToken = async (request: express.Request, response: express.Resp
 
 };
 
+/*
+Login using token.
+
+Request Header
+token: string
+
+Response JSON
+id: string
+*/
 export const get = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
     try {
@@ -44,6 +63,14 @@ export const get = async (request: express.Request, response: express.Response, 
 
 };
 
+/*
+Sign up.
+
+Request Body JSON
+id: string
+name: string
+pw: string
+*/
 export const post = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
     try {
@@ -67,6 +94,15 @@ export const post = async (request: express.Request, response: express.Response,
 
 };
 
+/*
+Get user data.
+
+Request Param
+id: string
+
+Response JSON
+name: string
+*/
 export const getData = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
     try {

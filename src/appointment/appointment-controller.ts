@@ -1,6 +1,23 @@
 import express from 'express';
 import * as appointmentService from './appointment-service';
 
+/*
+Create new appointment.
+
+Request Param
+id: string
+
+Request Body JSON
+date: string
+startTime: number
+endTime: number
+name: string
+description: string
+
+Response JSON
+list: array
+matrix: array
+*/
 export const post = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
     try {
@@ -27,6 +44,13 @@ export const post = async (request: express.Request, response: express.Response,
 
 };
 
+/*
+Get appointments of a week.
+
+Request Param
+id: string
+week: number
+*/
 export const get = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
     try {
