@@ -1,6 +1,5 @@
+import { userDAO, userUtility } from '../user';
 import * as utility from '../utility';
-import * as userDAO from './user-dao';
-import * as userUtility from './user-utility';
 
 export const postToken = (id: string, pw: string): Promise<any> => {
     return new Promise(async (resolve, reject) => {

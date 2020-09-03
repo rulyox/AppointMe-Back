@@ -1,5 +1,4 @@
-import { Appointment } from './appointment';
-import * as appointmentDAO from './appointment-dao';
+import { Appointment, appointmentDAO } from '../appointment';
 import * as utility from '../utility';
 
 export const post = (id: string, date: string, startTime: number, endTime: number, name: string, description: string, color: string): Promise<any> => {

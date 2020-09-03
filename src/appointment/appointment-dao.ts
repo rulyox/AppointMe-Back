@@ -1,6 +1,5 @@
 import * as DB from '../db';
-import { Appointment } from './appointment';
-import * as appointmentSQL from './appointment-sql';
+import { Appointment, appointmentSQL } from '../appointment';
 
 export const create = (appointment: Appointment) => {
     return new Promise(async (resolve, reject) => {

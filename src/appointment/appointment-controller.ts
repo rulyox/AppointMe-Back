@@ -1,5 +1,5 @@
 import express from 'express';
-import * as appointmentService from './appointment-service';
+import { appointmentService } from '../appointment';
 
 /*
 Create new appointment.

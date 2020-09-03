@@ -1,6 +1,5 @@
 import * as DB from '../db';
-import * as userUtility from './user-utility';
-import * as userSQL from './user-sql';
+import { userUtility, userSQL } from '../user';
 
 const getHashedPassword = (id: string, pw: string): Promise<string> => {
     return new Promise(async (resolve, reject) => {
