@@ -1,4 +1,4 @@
-import { userDAO, userUtility } from '../user';
+import { User, userDAO, userUtility } from '../user';
 import * as utility from '../utility';
 
 export const postToken = (id: string, pw: string): Promise<any> => {
@@ -67,7 +67,13 @@ export const post = (id: string, name: string, pw: string): Promise<any> => {
             // print log
             utility.print(`POST /user | id: ${id}`);
 
-            await userDAO.create(id, name, pw);
+            const salt = userUtility.createRandomSalt();
+
+            pw = userUtility.hash(pw, salt);
+
+            const user = new User(id, name, pw, salt);
+
+            await userDAO.create(user);
 
             resolve(undefined);
 
@@ -84,9 +90,11 @@ export const getData = (id: string): Promise<any> => {
             // print log
             utility.print(`GET /user/data | id: ${id}`);
 
-            const userData = await userDAO.get(id);
+            const user: User = await userDAO.get(id);
 
-            resolve(userData);
+            resolve({
+                name: user.name
+            });
 
         } catch(error) { reject(error); }
 

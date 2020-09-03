@@ -1,6 +1,6 @@
 export const selectById = (id: string): string =>
     `
-    SELECT name
+    SELECT *
     FROM users
     WHERE id = "${id}"
     ;`;

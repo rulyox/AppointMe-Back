@@ -1,5 +1,5 @@
 import * as DB from '../db';
-import { userUtility, userSQL } from '../user';
+import { User, userSQL, userUtility } from '../user';
 
 const getHashedPassword = (id: string, pw: string): Promise<string> => {
     return new Promise(async (resolve, reject) => {
@@ -44,7 +44,7 @@ export const checkLogin = (id: string, pw: string): Promise<number> => {
     });
 };
 
-export const checkToken = (token: string) => {
+export const checkToken = (token: string): Promise<string> => {
     return new Promise(async (resolve, reject) => {
 
         try {
@@ -59,16 +59,17 @@ export const checkToken = (token: string) => {
     });
 };
 
-export const create = (id: string, name: string, pw: string) => {
+export const create = (user: User): Promise<number> => {
     return new Promise(async (resolve, reject) => {
 
         try {
 
-            const salt = userUtility.createRandomSalt();
-
-            pw = userUtility.hash(pw, salt);
-
-            await DB.run(userSQL.add(id, name, pw, salt));
+            await DB.run(userSQL.add(
+                user.id,
+                user.name,
+                user.pw,
+                user.salt
+            ));
 
             resolve(101);
 
@@ -77,14 +78,22 @@ export const create = (id: string, name: string, pw: string) => {
     });
 };
 
-export const get = (id: string) => {
+export const get = (id: string): Promise<User> => {
     return new Promise(async (resolve, reject) => {
 
         try {
 
             const selectById = await DB.run(userSQL.selectById(id));
+            const selected = selectById[0];
 
-            resolve(selectById[0]);
+            const user = new User(
+                selected.id,
+                selected.name,
+                selected.pw,
+                selected.salt
+            );
+
+            resolve(user);
 
         } catch(error) { reject(error); }
 
