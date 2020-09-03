@@ -1,3 +1,4 @@
+import { Appointment } from './appointment';
 import * as appointmentDAO from './appointment-dao';
 import * as utility from '../utility';
 
@@ -9,7 +10,17 @@ export const post = (id: string, date: string, startTime: number, endTime: numbe
             // print log
             utility.print(`POST /appointment | id: ${id}`);
 
-            await appointmentDAO.create(id, date, startTime, endTime, name, description, color);
+            const appointment = new Appointment(
+                id,
+                date,
+                startTime.toString(),
+                endTime.toString(),
+                name,
+                description,
+                color
+            );
+
+            await appointmentDAO.create(appointment);
 
             resolve();
 
@@ -31,16 +42,30 @@ export const get = (id: string, week: string): Promise<any> => {
             const day = week.substr(6, 2);
             const weekStr = `${year}-${month}-${day}`;
 
-            const appointmentList: any[] = await appointmentDAO.getByWeek(id, weekStr);
+            const appointments: Appointment[] = await appointmentDAO.getByWeek(id, weekStr);
+
+            const appointmentList: any[] = [];
+
+            for(const item of appointments) {
+                appointmentList.push({
+                    startTime: item.startTime,
+                    endTime: item.endTime,
+                    name: item.name,
+                    description: item.description,
+                    color: item.color
+                });
+            }
 
             const appointmentMatrix: number[][] = [];
             for(let i = 0; i < 24; i++) appointmentMatrix.push([0, 0, 0, 0, 0, 0, 0]);
 
-            for(const [index, value] of Object.entries(appointmentList)) {
+            for(const [index, value] of Object.entries(appointments)) {
 
-                const weekDay = Number(value.weekday);
-                const startTime = Number(value.start_time.split(':')[0]);
-                const endTime = Number(value.end_time.split(':')[0]);
+                const date = new Date(value.date);
+                const weekDay = date.getDay() > 0 ? date.getDay()-1 : 6;
+
+                const startTime = Number(value.startTime.split(':')[0]);
+                const endTime = Number(value.endTime.split(':')[0]);
 
                 appointmentMatrix[startTime][weekDay] = Number(index)+1;
 
