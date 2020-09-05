@@ -19,9 +19,23 @@ export const post = (id: string, date: string, startTime: number, endTime: numbe
                 color
             );
 
-            await appointmentDAO.create(appointment);
+            const check = await appointmentDAO.checkOverlap(appointment);
 
-            resolve();
+            if(check === 0) {
+
+                await appointmentDAO.create(appointment);
+
+                resolve({
+                    result: 101
+                });
+
+            } else {
+
+                resolve({
+                    result: 201
+                });
+
+            }
 
         } catch(error) { reject(error); }
 

@@ -23,6 +23,26 @@ export const create = (appointment: Appointment) => {
     });
 };
 
+export const checkOverlap = (appointment: Appointment): Promise<number> => {
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            const selectOverlap = await DB.run(appointmentSQL.selectOverlap(
+                appointment.date,
+                appointment.startTime,
+                appointment.endTime
+            ));
+
+            const count = selectOverlap[0].count;
+
+            resolve(count);
+
+        } catch(error) { reject(error); }
+
+    });
+};
+
 export const getByWeek = (id: string, week: string): Promise<Appointment[]> => {
     return new Promise(async (resolve, reject) => {
 
