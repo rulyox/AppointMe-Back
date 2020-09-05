@@ -26,13 +26,15 @@ export const post = (id: string, date: string, startTime: number, endTime: numbe
                 await appointmentDAO.create(appointment);
 
                 resolve({
-                    result: 101
+                    result: 101,
+                    message: 'OK'
                 });
 
             } else {
 
                 resolve({
-                    result: 201
+                    result: 201,
+                    message: 'Appointment overlaps'
                 });
 
             }

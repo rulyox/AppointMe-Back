@@ -24,11 +24,17 @@ export const postToken = (id: string, pw: string): Promise<any> => {
                     break;
 
                 case 201:
-                    resolve(undefined);
+                    resolve({
+                        result: 201,
+                        message: 'ID does not exist'
+                    });
                     break;
 
                 case 202:
-                    resolve(undefined);
+                    resolve({
+                        result: 202,
+                        message: 'Wrong password'
+                    });
                     break;
 
             }
@@ -75,7 +81,10 @@ export const post = (id: string, name: string, pw: string): Promise<any> => {
 
             await userDAO.create(user);
 
-            resolve(undefined);
+            resolve({
+                result: 101,
+                message: 'OK'
+            });
 
         } catch(error) { reject(error); }
 
