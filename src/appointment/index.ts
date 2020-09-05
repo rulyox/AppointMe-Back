@@ -1,7 +1,7 @@
 import { Appointment } from './appointment';
-import * as appointmentController from './appointment-controller';
-import * as appointmentService from './appointment-service';
-import * as appointmentDAO from './appointment-dao';
-import * as appointmentSQL from './appointment-sql';
+import * as appointmentController from './controller.appointment';
+import * as appointmentService from './service.appointment';
+import * as appointmentDAO from './dao.appointment';
+import * as appointmentSQL from './sql.appointment';
 
 export { Appointment, appointmentController, appointmentService, appointmentDAO, appointmentSQL };

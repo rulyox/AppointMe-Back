@@ -1,6 +1,6 @@
 import express from 'express';
-import userRouter from './user/user-router';
-import appointmentRouter from './appointment/appointment-router';
+import userRouter from './user/router.user';
+import appointmentRouter from './appointment/router.appointment';
 
 const router = express.Router();
 
