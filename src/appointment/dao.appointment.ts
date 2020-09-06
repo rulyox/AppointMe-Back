@@ -55,6 +55,7 @@ export const getByWeek = (id: string, week: string): Promise<Appointment[]> => {
             for(const item of selectByWeek) {
 
                 appointmentList.push(new Appointment(
+                    item.id,
                     item.user_id,
                     item.app_date,
                     item.start_time,

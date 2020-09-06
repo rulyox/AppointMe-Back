@@ -1,5 +1,6 @@
 export class Appointment {
 
+    private _id: number;
     private _userId: string;
     private _date: string
     private _startTime: string
@@ -8,7 +9,8 @@ export class Appointment {
     private _description: string
     private _color: string
 
-    constructor(userId: string, date: string, startTime: string, endTime: string, name: string, description: string, color: string) {
+    constructor(id: number, userId: string, date: string, startTime: string, endTime: string, name: string, description: string, color: string) {
+        this._id = id;
         this._userId = userId;
         this._date = date;
         this._startTime = startTime;
@@ -16,6 +18,14 @@ export class Appointment {
         this._name = name;
         this._description = description;
         this._color = color;
+    }
+
+    get id(): number {
+        return this._id;
+    }
+
+    set id(value: number) {
+        this._id = value;
     }
 
     get userId(): string {

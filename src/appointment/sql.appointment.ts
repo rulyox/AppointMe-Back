@@ -15,7 +15,7 @@ export const selectOverlap = (date: string, startTime: string, endTime: string):
 
 export const selectByWeek = (id: string, week: string): string =>
     `
-    SELECT user_id, DATE_FORMAT(app_date, '%Y-%m-%d') AS app_date, start_time, end_time, app_name, app_description, app_color
+    SELECT id, user_id, DATE_FORMAT(app_date, '%Y-%m-%d') AS app_date, start_time, end_time, app_name, app_description, app_color
     FROM appointments
     WHERE user_id = '${id}'
         AND WEEK(app_date, 1) = WEEK('${week}', 1)

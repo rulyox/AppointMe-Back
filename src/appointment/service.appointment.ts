@@ -10,6 +10,7 @@ export const post = (id: string, date: string, startTime: number, endTime: numbe
             utility.print(`POST /appointment | id: ${id}`);
 
             const appointment = new Appointment(
+                0,
                 id,
                 date,
                 startTime.toString(),
@@ -63,6 +64,7 @@ export const get = (id: string, week: string): Promise<any> => {
 
             for(const item of appointments) {
                 appointmentList.push({
+                    id: item.id,
                     startTime: item.startTime,
                     endTime: item.endTime,
                     name: item.name,

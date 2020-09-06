@@ -21,14 +21,6 @@ id: string
 }
 ```
 
-* Response JSON
-```json
-{
-  "list": "array",
-  "matrix": "array"
-}
-```
-
 ## GET /appointment
 
 Get appointments of a week.
@@ -37,4 +29,12 @@ Get appointments of a week.
 ```
 id: string
 week: number
+```
+
+* Response JSON
+```json
+{
+  "list": "array",
+  "matrix": "array"
+}
 ```

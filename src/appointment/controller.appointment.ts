@@ -14,10 +14,6 @@ endTime: number
 name: string
 description: string
 color: string
-
-Response JSON
-list: array
-matrix: array
 */
 export const post = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
@@ -52,6 +48,10 @@ Get appointments of a week.
 Request Param
 id: string
 week: number
+
+Response JSON
+list: array
+matrix: array
 */
 export const get = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
