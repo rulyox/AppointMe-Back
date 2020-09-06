@@ -21,3 +21,16 @@ export const selectByWeek = (id: string, week: string): string =>
         AND WEEK(app_date, 1) = WEEK('${week}', 1)
     ORDER BY app_date, start_time
     ;`;
+
+export const selectUser = (id: number): string =>
+    `
+    SELECT user_id
+    FROM appointments
+    WHERE id = ${id}
+    ;`;
+
+export const deleteAppointment = (id: number): string =>
+    `
+    DELETE FROM appointments
+    WHERE id = ${id}
+    ;`;

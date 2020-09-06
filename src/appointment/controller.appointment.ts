@@ -74,3 +74,34 @@ export const get = async (request: express.Request, response: express.Response, 
     } catch(error) { next(error); }
 
 };
+
+/*
+Delete appointment.
+
+Request Param
+id: string
+
+Request Header
+token: string
+*/
+export const deleteAppointment = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+
+    try {
+
+        // parse request
+        const id = request.params.id;
+        const token = request.headers.token;
+
+        // type check
+        if(isNaN(Number(id)) || typeof token !== 'string') {
+            response.status(400).end();
+            return;
+        }
+
+        // response
+        const result = await appointmentService.deleteAppointment(token, Number(id));
+        response.json(result);
+
+    } catch(error) { next(error); }
+
+};

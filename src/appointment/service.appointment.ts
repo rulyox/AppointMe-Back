@@ -1,4 +1,5 @@
 import { Appointment, appointmentDAO } from '../appointment';
+import { userDAO } from '../user';
 import * as utility from '../utility';
 
 export const post = (id: string, date: string, startTime: number, endTime: number, name: string, description: string, color: string): Promise<any> => {
@@ -94,6 +95,41 @@ export const get = (id: string, week: string): Promise<any> => {
                 list: appointmentList,
                 matrix: appointmentMatrix
             });
+
+        } catch(error) { reject(error); }
+
+    });
+};
+
+export const deleteAppointment = (token: string, id: number): Promise<any> => {
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            const userId = await userDAO.checkToken(token);
+
+            // print log
+            utility.print(`DELETE /appointment | userId: ${userId} id: ${id}`);
+
+            const user = await appointmentDAO.getUser(id);
+
+            if(user === userId) {
+
+                await appointmentDAO.deleteAppointment(id);
+
+                resolve({
+                    result: 101,
+                    message: 'OK'
+                });
+
+            } else {
+
+                resolve({
+                    result: 201,
+                    message: 'Wrong user'
+                });
+
+            }
 
         } catch(error) { reject(error); }
 

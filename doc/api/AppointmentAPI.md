@@ -38,3 +38,17 @@ week: number
   "matrix": "array"
 }
 ```
+
+## DELETE /appointment
+
+Delete appointment.
+
+* Request Param
+```
+id: string
+```
+
+* Request Header
+```
+token: string
+```

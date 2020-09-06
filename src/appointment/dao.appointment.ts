@@ -73,3 +73,31 @@ export const getByWeek = (id: string, week: string): Promise<Appointment[]> => {
 
     });
 };
+
+export const getUser = (id: number): Promise<string> => {
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            const selectUser = await DB.run(appointmentSQL.selectUser(id));
+
+            resolve(selectUser[0].user_id);
+
+        } catch(error) { reject(error); }
+
+    });
+};
+
+export const deleteAppointment = (id: number) => {
+    return new Promise(async (resolve, reject) => {
+
+        try {
+
+            await DB.run(appointmentSQL.deleteAppointment(id));
+
+            resolve();
+
+        } catch(error) { reject(error); }
+
+    });
+};
