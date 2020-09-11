@@ -29,6 +29,7 @@ export const checkOverlap = (appointment: Appointment): Promise<number> => {
         try {
 
             const selectOverlap = await DB.run(appointmentSQL.selectOverlap(
+                appointment.userId,
                 appointment.date,
                 appointment.startTime,
                 appointment.endTime

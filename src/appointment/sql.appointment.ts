@@ -4,13 +4,13 @@ export const add = (id: string, date: string, startTime: string, endTime: string
     VALUES (NULL, '${id}', '${date}', ${startTime}, ${endTime}, '${name}', '${description}', '${color}')
     ;`;
 
-export const selectOverlap = (date: string, startTime: string, endTime: string): string =>
+export const selectOverlap = (id: string, date: string, startTime: string, endTime: string): string =>
     `
     SELECT COUNT(*) AS count
     FROM appointments
-    WHERE app_date = '${date}'
-    AND start_time <= ${startTime}
-    AND end_time >= ${endTime}
+    WHERE user_id = '${id}'
+        AND app_date = '${date}'
+        AND (start_time < ${endTime} AND end_time > ${startTime})
     ;`;
 
 export const selectByWeek = (id: string, week: string): string =>
