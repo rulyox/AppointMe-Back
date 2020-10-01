@@ -37,7 +37,7 @@ export const postToken = async (request: express.Request, response: express.Resp
 Login using token.
 
 Request Header
-token: string
+Authorization Bearer
 
 Response JSON
 id: string
@@ -47,13 +47,15 @@ export const get = async (request: express.Request, response: express.Response, 
     try {
 
         // parse request
-        const token = request.headers.token;
+        const auth = request.headers.authorization;
 
         // type check
-        if(typeof token !== 'string') {
+        if(typeof auth !== 'string' || !auth.includes('Bearer ')) {
             response.status(400).end();
             return;
         }
+
+        const token = auth.replace('Bearer ', '');
 
         // response
         const result = await userService.get(token);

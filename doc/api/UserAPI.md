@@ -25,7 +25,7 @@ Login using token.
 
 * Request Header
 ```
-token: string
+Authorization Bearer
 ```
 
 * Response JSON

@@ -50,5 +50,5 @@ id: string
 
 * Request Header
 ```
-token: string
+Authorization Bearer
 ```

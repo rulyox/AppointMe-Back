@@ -82,7 +82,7 @@ Request Param
 id: string
 
 Request Header
-token: string
+Authorization Bearer
 */
 export const deleteAppointment = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
 
@@ -90,13 +90,15 @@ export const deleteAppointment = async (request: express.Request, response: expr
 
         // parse request
         const id = request.params.id;
-        const token = request.headers.token;
+        const auth = request.headers.authorization;
 
         // type check
-        if(isNaN(Number(id)) || typeof token !== 'string') {
+        if(isNaN(Number(id)) || typeof auth !== 'string' || !auth.includes('Bearer ')) {
             response.status(400).end();
             return;
         }
+
+        const token = auth.replace('Bearer ', '');
 
         // response
         const result = await appointmentService.deleteAppointment(token, Number(id));
